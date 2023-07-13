@@ -1,11 +1,10 @@
 //import modules needed
-import * as pg from "pg";
-const { Pool } = pg;
+import pg from "pg";
 
 const dbString = process.env.DATABASE_URL;
 const port = process.env.PORT;
 
-const pool = new Pool({
+const pool = new pg.Pool({
   connectionString: dbString,
 });
 
