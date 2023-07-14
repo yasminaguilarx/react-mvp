@@ -28,7 +28,7 @@ app.get("/blog_posts", async (req, res) => {
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
     } else {
-      res.status(200).send(result.rows[0]);
+      res.status(200).send(result.rows);
     }
   } catch (err) {
     console.error("Unable to grab posts for you!", err);
