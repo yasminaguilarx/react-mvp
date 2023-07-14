@@ -44,7 +44,7 @@ app.get("/blog_posts", async (req, res) => {
   }
 });
 
-app.get("/blog_posts", async (req, res) => {
+app.get("/users", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM users");
 
@@ -59,7 +59,7 @@ app.get("/blog_posts", async (req, res) => {
   }
 });
 
-app.get("/blog_posts", async (req, res) => {
+app.get("/comments", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM comments");
 
