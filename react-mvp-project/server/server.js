@@ -44,6 +44,36 @@ app.get("/blog_posts", async (req, res) => {
   }
 });
 
+app.get("/blog_posts", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM users");
+
+    if (result.rowCount === 0) {
+      res.status(404).send("Not Found");
+    } else {
+      res.status(200).json(result.rows[0]);
+    }
+  } catch (err) {
+    console.error("Unable to grab posts for you!", err);
+    res.status(500).send("Internal Server Error: Blog Posts");
+  }
+});
+
+app.get("/blog_posts", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM comments");
+
+    if (result.rowCount === 0) {
+      res.status(404).send("Not Found");
+    } else {
+      res.status(200).json(result.rows[0]);
+    }
+  } catch (err) {
+    console.error("Unable to grab posts for you!", err);
+    res.status(500).send("Internal Server Error: Blog Posts");
+  }
+});
+
 app.get("/blog_posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
