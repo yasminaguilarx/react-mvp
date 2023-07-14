@@ -27,7 +27,8 @@ app.use(cors({ origin: "*" }));
 app.get("/blog_posts", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT bp.post_title, bp.blog_post, u.user_name, c.comment_body FROM blog_posts AS bp JOIN comments AS c ON bp.post_id = c.post_id JOIN users AS u ON c.user_id = u.user_id"
+      // "SELECT bp.post_title, bp.blog_post, u.user_name, c.comment_body FROM blog_posts AS bp JOIN comments AS c ON bp.post_id = c.post_id JOIN users AS u ON c.user_id = u.user_id"
+      "SELECT * FROM blog_posts"
     );
 
     if (result.rowCount === 0) {
