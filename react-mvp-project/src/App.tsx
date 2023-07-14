@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <h1>I am working</h1>
-      <Posts />
+      <Posts blogData={blogData} />
     </>
   );
 }

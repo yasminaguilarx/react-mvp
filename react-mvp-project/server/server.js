@@ -26,12 +26,7 @@ app.use(cors({ origin: "*" }));
 //routes
 app.get("/blog_posts", async (req, res) => {
   try {
-    const result = await pool.query(
-      // "SELECT bp.post_title, bp.blog_post, u.user_name, c.comment_body FROM blog_posts AS bp JOIN comments AS c ON bp.post_id = c.post_id JOIN users AS u ON c.user_id = u.user_id"
-      "SELECT * FROM blog_posts",
-      "SELECT * FROM users",
-      "SELECT * FROM comments"
-    );
+    const result = await pool.query("SELECT * FROM blog_posts");
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -55,7 +50,7 @@ app.get("/users", async (req, res) => {
     }
   } catch (err) {
     console.error("Unable to grab posts for you!", err);
-    res.status(500).send("Internal Server Error: Blog Posts");
+    res.status(500).send("Internal Server Error: Users");
   }
 });
 
@@ -70,7 +65,7 @@ app.get("/comments", async (req, res) => {
     }
   } catch (err) {
     console.error("Unable to grab posts for you!", err);
-    res.status(500).send("Internal Server Error: Blog Posts");
+    res.status(500).send("Internal Server Error: Comments");
   }
 });
 
