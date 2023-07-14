@@ -21,7 +21,11 @@ user_email TEXT
 -- comments table
 CREATE TABLE comments (
 comment_id SERIAL PRIMARY KEY,
-comment_body VARCHAR(150)
+comment_body VARCHAR(150),
+post_id SERIAL,
+FOREIGN KEY (post_id) REFERENCES blog_posts(post_id),
+user_id SERIAL,
+FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 --seed data into blog posts

@@ -26,9 +26,7 @@ app.use(cors({ origin: "*" }));
 //routes
 app.get("/blog_posts", async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT post_title, blog_post FROM blog_posts"
-    );
+    const result = await pool.query("SELECT * FROM blog_posts");
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
