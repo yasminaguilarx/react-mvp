@@ -21,7 +21,7 @@ user_email TEXT
 -- comments table
 CREATE TABLE comments (
 comment_id SERIAL PRIMARY KEY,
-comment_body VARCHAR(150),
+comment_body VARCHAR(150)
 );
 
 --seed data into blog posts
@@ -30,11 +30,11 @@ VALUES
   (1, 'Introduction', 'Get to know me');
 
 --seed data into user table
-INSERT INTO blog_posts (user_id, user_name, user_email)
+INSERT INTO users (user_id, user_name, user_email)
 VALUES
   (1, 'example-name', 'example@gmail.com');
 
 --seed data into comments
-INSERT INTO blog_posts (post_id, post_title, blog_post)
+INSERT INTO comments (comment_id, comment_body)
 VALUES
   (1, 'Simple introduction for me as a software engineer');
