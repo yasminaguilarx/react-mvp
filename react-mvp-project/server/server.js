@@ -51,7 +51,7 @@ app.get("/blog_posts/:id", async (req, res) => {
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
     }
-    res.status(200).send(result.rows[0]);
+    res.status(200).json(result.rows[0]);
   } catch (err) {
     console.error("Unable to grab the post!", err);
     res.status(500).send("Internal Server Error: Blog Post");
