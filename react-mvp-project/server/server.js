@@ -26,7 +26,9 @@ app.use(cors({ origin: "*" }));
 //routes
 app.get("/blog_posts", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM blog_posts");
+    const result = await pool.query(
+      "SELECT bp.*, u.*, c.* FROM blog_posts AS bp JOIN comments AS c ON bp.post_id = c.post_id JOIN users AS u ON c.user_id = u.user_id"
+    );
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -43,7 +45,7 @@ app.get("/blog_posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query(
-      `SELECT * FROM blog_posts WHERE post_id = $1`,
+      `SELECT * FROM blog_posts,  WHERE post_id = $1`,
       [id]
     );
     if (result.rowCount === 0) {
