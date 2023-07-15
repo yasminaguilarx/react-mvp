@@ -1,4 +1,6 @@
 -- db name is react-mvp-app
+--migrate with \i ./server/server.js
+
 
 DROP TABLE IF EXISTS blog_posts CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
@@ -8,7 +10,8 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE blog_posts (
 post_id SERIAL PRIMARY KEY,
 post_title VARCHAR(50),
-blog_post TEXT
+blog_post TEXT,
+created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- user table
@@ -39,6 +42,6 @@ VALUES
   (1, 'example-name', 'example@gmail.com');
 
 --seed data into comments
-INSERT INTO comments (comment_id, comment_body)
+INSERT INTO comments (comment_id, comment_body, post_id, user_id)
 VALUES
-  (1, 'Simple introduction for me as a software engineer');
+  (1, 'Simple introduction for me as a software engineer', 1, 1);

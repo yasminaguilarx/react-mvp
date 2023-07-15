@@ -9,6 +9,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 dotenv.config();
 
+//select column name from table 1
+
 const dbString = process.env.DATABASE_URL;
 
 const port = process.env.PORT;
@@ -39,9 +41,13 @@ app.get("/blog_posts", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
+app.get("/users/:userId/comments", async (req, res) => {
+  const { id } = req.params;
   try {
-    const result = await pool.query("SELECT user_name, user_email FROM users");
+    const result = await pool.query(
+      "SELECT * FROM comments WHERE user_id = $1",
+      [id]
+    );
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -54,9 +60,13 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.get("/comments", async (req, res) => {
+app.get("/blog_posts/:postId/comments", async (req, res) => {
+  const { id } = req.params;
   try {
-    const result = await pool.query("SELECT comment_body FROM comments");
+    const result = await pool.query(
+      "SELECT * FROM comments WHERE user_id = $1",
+      [id]
+    );
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -73,7 +83,7 @@ app.get("/blog_posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query(
-      `SELECT * FROM blog_posts,  WHERE post_id = $1`,
+      `SELECT * FROM blog_posts WHERE post_id = $1`,
       [id]
     );
     if (result.rowCount === 0) {
