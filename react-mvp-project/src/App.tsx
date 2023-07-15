@@ -7,13 +7,13 @@ import "./App.css";
 function App() {
   const [blogData, setBlogData] = useState([]);
 
-  const blogPath = "https://react-mvp-app.onrender.com";
+  const blogPath = "https://react-mvp-app.onrender.com/blog_posts";
 
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(blogPath);
       setBlogData(res.data);
-      console.log(res);
+      console.log(res.data);
     };
 
     getData();
