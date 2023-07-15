@@ -41,7 +41,7 @@ app.get("/blog_posts", async (req, res) => {
 
 app.get("/users", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM users");
+    const result = await pool.query("SELECT user_name, user_email FROM users");
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -56,7 +56,7 @@ app.get("/users", async (req, res) => {
 
 app.get("/comments", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM comments");
+    const result = await pool.query("SELECT comment_body FROM comments");
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
