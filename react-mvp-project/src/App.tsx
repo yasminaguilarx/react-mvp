@@ -7,17 +7,21 @@ import "./App.css";
 function App() {
   const [blogData, setBlogData] = useState([]);
 
-  const blogPath = "https://react-mvp-app.onrender.com/blog_posts";
+  const blogPath = "https://react-mvp-app.onrender.com/";
+
+  axios.defaults.validateStatus = (status) => {
+    return status < 500;
+  };
+
+  const getData = async () => {
+    const res = await axios.get(blogPath);
+    setBlogData(res.data);
+    console.log(res.data);
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      const res = await axios.get(blogPath);
-      setBlogData(res.data);
-      console.log(res.data);
-    };
-
     getData();
-  }, [blogPath]);
+  }, []);
 
   return (
     <>

@@ -29,7 +29,7 @@ app.use(cors({ origin: "*" }));
 app.get("/blog_posts", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM blog_posts");
-
+    console.log(result);
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
     } else {
@@ -48,6 +48,7 @@ app.get("/users/:userId/comments", async (req, res) => {
       "SELECT * FROM comments WHERE user_id = $1",
       [id]
     );
+    console.log(result);
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -67,6 +68,7 @@ app.get("/blog_posts/:postId/comments", async (req, res) => {
       "SELECT * FROM comments WHERE user_id = $1",
       [id]
     );
+    console.log(result);
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -86,6 +88,8 @@ app.get("/blog_posts/:id", async (req, res) => {
       `SELECT * FROM blog_posts WHERE post_id = $1`,
       [id]
     );
+    console.log(result);
+
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
     }
