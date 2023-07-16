@@ -19,6 +19,10 @@ const pool = new Pool({
   connectionString: dbString,
 });
 
+pool.connect(() => {
+  console.log("Connected to the database");
+});
+
 const app = express();
 
 //middleware
@@ -26,7 +30,7 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 //routes
-app.get("blog_posts", async (req, res) => {
+app.get("/blog_posts", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM blog_posts");
     console.log(result);
@@ -41,7 +45,7 @@ app.get("blog_posts", async (req, res) => {
   }
 });
 
-app.get("users/:userId/comments", async (req, res) => {
+app.get("/users/:userId/comments", async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(
@@ -61,7 +65,7 @@ app.get("users/:userId/comments", async (req, res) => {
   }
 });
 
-app.get("blog_posts/:postId/comments", async (req, res) => {
+app.get("/blog_posts/:postId/comments", async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(
@@ -81,7 +85,7 @@ app.get("blog_posts/:postId/comments", async (req, res) => {
   }
 });
 
-app.get("blog_posts/:id", async (req, res) => {
+app.get("/blog_posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query(
