@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 //routes
-app.get("/blog_posts", async (req, res) => {
+app.get("blog_posts", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM blog_posts");
     console.log(result);
@@ -41,7 +41,7 @@ app.get("/blog_posts", async (req, res) => {
   }
 });
 
-app.get("/users/:userId/comments", async (req, res) => {
+app.get("users/:userId/comments", async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(
@@ -61,14 +61,14 @@ app.get("/users/:userId/comments", async (req, res) => {
   }
 });
 
-app.get("/blog_posts/:postId/comments", async (req, res) => {
+app.get("blog_posts/:postId/comments", async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(
       "SELECT * FROM comments WHERE user_id = $1",
       [id]
     );
-    console.log(result);
+    console.log(result.rows);
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
@@ -81,14 +81,14 @@ app.get("/blog_posts/:postId/comments", async (req, res) => {
   }
 });
 
-app.get("/blog_posts/:id", async (req, res) => {
+app.get("blog_posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query(
       `SELECT * FROM blog_posts WHERE post_id = $1`,
       [id]
     );
-    console.log(result);
+    console.log(result.rows);
 
     if (result.rowCount === 0) {
       res.status(404).send("Not Found");
