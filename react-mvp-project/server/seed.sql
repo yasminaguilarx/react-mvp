@@ -1,5 +1,5 @@
 -- db name is react-mvp-app
---migrate with \i ./server/server.js
+--migrate with \i ./seed.sql
 
 
 DROP TABLE IF EXISTS blog_posts CASCADE;
@@ -11,27 +11,34 @@ CREATE TABLE blog_posts (
 post_id SERIAL PRIMARY KEY,
 post_title VARCHAR(50),
 blog_post TEXT,
-created_at TIMESTAMP DEFAULT NOW(),
-UNIQUE (post_id)
+created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- user table
 CREATE TABLE users (
 user_id SERIAL PRIMARY KEY,
 user_name VARCHAR(50),
-user_email TEXT,
-UNIQUE (user_id)
+user_email TEXT
 );
 
 -- comments table
+-- CREATE TABLE comments (
+-- comment_id SERIAL PRIMARY KEY,
+-- comment_body VARCHAR(150),
+-- post_id SERIAL,
+-- FOREIGN KEY (post_id) REFERENCES blog_posts(post_id),
+-- user_id SERIAL,
+-- FOREIGN KEY (user_id) REFERENCES users(user_id), 
+-- UNIQUE (post_id, user_id)
+-- );
+
 CREATE TABLE comments (
-comment_id SERIAL PRIMARY KEY,
-comment_body VARCHAR(150),
-post_id SERIAL,
-FOREIGN KEY (post_id) REFERENCES blog_posts(post_id),
-user_id SERIAL,
-FOREIGN KEY (user_id) REFERENCES users(user_id),
-UNIQUE (post_id, user_id)
+  comment_id SERIAL PRIMARY KEY,
+  comment_body VARCHAR(150),
+  user_id INT,
+  post_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (post_id) REFERENCES blog_posts(post_id)
 );
 
 --seed data into blog posts

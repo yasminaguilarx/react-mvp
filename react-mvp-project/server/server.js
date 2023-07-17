@@ -134,22 +134,37 @@ app.post("/blog_posts", async (req, res) => {
   }
 });
 
-//create a comment
-app.post("/blog_posts/:id/comments", async (req, res) => {
-  const { id } = req.params;
-  const { comment_body } = req.body;
+// //create a comment
+// app.post("/comments", async (req, res) => {
+//   const { id } = req.params;
+//   const { comment_body, post_id, user_id } = req.body;
+//   try {
+//     const result = await pool.query(
+//       `INSERT INTO comments (comment_body, post_id, user_id) VALUES ($1, $2, $3)`,
+//       [comment_body, post_id, user_id]
+//     );
+//     res
+//       .setHeader("Content-Type", "application/json")
+//       .status(200)
+//       .json(result.rows[0]);
+//   } catch (err) {
+//     console.error("Unable to create new comment!", err);
+//     res.status(500).send("Internal Server Error: Create Post");
+//   }
+// });
+
+// purpose: create a comment
+app.post("/comments", async (req, res) => {
+  const { comment_body, post_id, user_id } = req.body;
   try {
     const result = await pool.query(
-      `INSERT INTO comments (comment_body, post_id) VALUES ($1, $2)`,
-      [comment_body, id]
+      `INSERT INTO comments (comment_body, post_id, user_id) VALUES ($1, $2, $3) RETURNING *`,
+      [comment_body, post_id, user_id]
     );
-    res
-      .setHeader("Content-Type", "application/json")
-      .status(200)
-      .json(result.rows[0]);
+    res.status(200).json(result.rows[0]);
   } catch (err) {
-    console.error("Unable to create new comment!", err);
-    res.status(500).send("Internal Server Error: Create Post");
+    console.error("Unable to create a new comment!", err);
+    res.status(500).send("Internal Server Error: Create Comment");
   }
 });
 
