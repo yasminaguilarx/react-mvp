@@ -11,14 +11,16 @@ CREATE TABLE blog_posts (
 post_id SERIAL PRIMARY KEY,
 post_title VARCHAR(50),
 blog_post TEXT,
-created_at TIMESTAMP DEFAULT NOW()
+created_at TIMESTAMP DEFAULT NOW(),
+UNIQUE (post_id)
 );
 
 -- user table
 CREATE TABLE users (
 user_id SERIAL PRIMARY KEY,
 user_name VARCHAR(50),
-user_email TEXT
+user_email TEXT,
+UNIQUE (user_id)
 );
 
 -- comments table
@@ -28,7 +30,8 @@ comment_body VARCHAR(150),
 post_id SERIAL,
 FOREIGN KEY (post_id) REFERENCES blog_posts(post_id),
 user_id SERIAL,
-FOREIGN KEY (user_id) REFERENCES users(user_id)
+FOREIGN KEY (user_id) REFERENCES users(user_id),
+UNIQUE (post_id, user_id)
 );
 
 --seed data into blog posts
