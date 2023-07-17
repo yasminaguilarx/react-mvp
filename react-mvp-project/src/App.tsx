@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   const [blogData, setBlogData] = useState([]);
 
-  const blogPath = "https://react-mvp-app.onrender.com/";
+  const blogPath = "https://react-mvp-app.onrender.com/comments";
 
   axios.defaults.validateStatus = (status) => {
     return status < 500;
@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <h1 id='randomTxt'>I am working</h1>
-      <Posts blogData={blogData} />
+      {/* <Posts blogData={blogData} /> */}
       {/* <Posts /> */}
     </>
   );

@@ -12,21 +12,21 @@ dotenv.config();
 
 //select column name from table 1
 
-// const dbString = process.env.DATABASE_URL;
+const dbString = process.env.DATABASE_URL;
 
-// const port = process.env.PORT;
-
-// const pool = new Pool({
-//   connectionString: dbString,
-// });
+const port = process.env.PORT;
 
 const pool = new Pool({
-  host: "localhost",
-  port: 5432,
-  database: "blog_app_7fno01",
-  user: "Yasmin Aguilar",
-  password: "123",
+  connectionString: dbString,
 });
+
+// const pool = new Pool({
+//   host: "localhost",
+//   port: 5432,
+//   database: "blog_app_7fno01",
+//   user: "Yasmin Aguilar",
+//   password: "123",
+// });
 
 pool.connect(() => {
   console.log("Connected to the database");
@@ -248,6 +248,10 @@ app.delete("/blog_posts/:id/comments/:id", async (req, res) => {
 // app.listen(port, () => {
 //   console.log(`I am listening on port: ${port}`);
 // });
-app.listen(4000, () => {
-  console.log(`I am listening on port: 4000`);
+// app.listen(4000, () => {
+//   console.log(`I am listening on port: 4000`);
+// });
+
+app.listen(port, () => {
+  console.log(`I am listening on port: ${port}`);
 });
