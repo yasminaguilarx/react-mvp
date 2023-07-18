@@ -1,6 +1,16 @@
 import { useEffect } from "react";
 
 function Posts({ posts }) {
+  //  const id = posts.post_id;
+  //   const getComments = async () => (
+  //       const res = await fetch(`http://localhost:4000/blog_posts/${id}/comments`)
+  //       const data
+  //   )
+
+  //   useEffect(() => {
+
+  //   })
+
   return (
     <>
       {posts.map((post) => (

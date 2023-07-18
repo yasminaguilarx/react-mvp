@@ -17,16 +17,6 @@ function App() {
     getPosts();
   }, []);
 
-  // const id = posts.post_id;
-  // const getComments = async () => (
-  //     const res = await fetch(`http://localhost:4000/blog_posts/${id}/comments`)
-  //     const data
-  // )
-
-  // useEffect(() => {
-
-  // })
-
   return (
     <>
       <h1 id='randomTxt'>I am working</h1>
