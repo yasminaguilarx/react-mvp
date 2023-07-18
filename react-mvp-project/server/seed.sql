@@ -42,9 +42,9 @@ CREATE TABLE comments (
 );
 
 --seed data into blog posts
-INSERT INTO blog_posts (post_id, post_title, blog_post)
+INSERT INTO blog_posts (post_id, post_title, blog_post, created_at)
 VALUES
-  (1, 'Introduction', 'Get to know me');
+  (1, 'Introduction', 'Get to know me', '7/18/2023');
 
 --seed data into user table
 INSERT INTO users (user_id, user_name, user_email)
